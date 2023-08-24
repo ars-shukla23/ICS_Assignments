@@ -63,6 +63,47 @@ string caesar_decrypt(string st,int shift){
 
 }
 
+string railfence_encryption(string st,int key){
+  string final_string;
+  int n=st.length();
+  char space[key][n];
+  int row=0,col=0;
+  bool down_flag=false;
+    for(int j=0;j<key;j++){
+      for(int i=0;i<n;i++){
+         space[i][j]='\0';
+      }
+
+    }
+    for(int i=0;i<n;i++){
+      char c=st[i];
+      space[row][col]=c;
+      if(row==0 || row==key-1){
+         down_flag=!down_flag; //This is used to toggle the down flag when we are either at the first row or last row
+      }
+      col++;
+      if(down_flag==true){
+         row=row+1;
+      }
+      if(down_flag==false){
+         row=row-1;
+      }
+    }
+
+    for(int i=0;i<key;i++){
+      for(int j=0;j<n;j++){
+         if(space[i][j]!='\0'){
+            final_string.push_back(space[i][j]);
+
+         }
+      }
+    }
+
+  
+ return final_string;   
+
+}
+
 int main(){
    for(int i=0;i<26;i++){
     sample[i]=char(97+i);
@@ -104,7 +145,16 @@ int main(){
           cout<<"What do you want to perform(1 or 2):\n1)Encrypt\n2)Decrypt\n";
           cin>>ch2;
           if (ch2==1){
-            cout<<"Rail Fence Encryption";
+            int key;
+           string str;
+           string encrypted_string;
+           cout<<"Enter the key(number of rails):";
+           cin>>key;
+           cout<<"Enter the string you want to encrypt:";
+           cin>>str;
+           encrypted_string=railfence_encryption(str,key);
+           cout<<"The encrypted string is: "<<encrypted_string<<endl;
+    
           }
           else if(ch2==2){
             cout<<"Rail Fence Decryption";
