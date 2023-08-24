@@ -71,7 +71,7 @@ string railfence_encryption(string st,int key){
   bool down_flag=false;
     for(int j=0;j<key;j++){
       for(int i=0;i<n;i++){
-         space[i][j]='\0';
+         space[j][i]='\0';
       }
 
     }
